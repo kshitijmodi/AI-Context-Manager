@@ -1,0 +1,492 @@
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Force hide Streamlit elements */
+#MainMenu, footer, header, .stDeployButton,
+[data-testid="stHeader"],
+[data-testid="stDecoration"],
+[data-testid="stToolbar"] {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Dark theme */
+.stApp {
+    background: hsl(222.2, 84%, 4.9%);
+}
+
+/* Sidebar styling */
+section[data-testid="stSidebar"] {
+    background: hsl(222.2, 84%, 4.9%) !important;
+    border-right: 1px solid hsl(217.2, 32.6%, 17.5%) !important;
+}
+
+section[data-testid="stSidebar"] > div {
+    background: hsl(222.2, 84%, 4.9%) !important;
+}
+
+/* Sidebar content */
+[data-testid="stSidebarContent"] {
+    padding: 0 !important;
+}
+
+.block-container {
+    padding: 0 !important;
+    max-width: 100% !important;
+}
+
+/* Main content area */
+.main .block-container {
+    padding: 0 !important;
+}
+
+/* ========== CHAT MESSAGE CONTAINERS ========== */
+
+/* Force all chat messages into flex containers */
+[data-testid="stChatMessage"] {
+    display: flex !important;
+    width: 100% !important;
+    padding: 0.75rem 0 !important;
+    margin: 0 !important;
+}
+
+/* USER MESSAGES - Right aligned */
+.stChatMessage:has([data-testid="stChatMessageAvatarUser"]),
+[data-testid="stChatMessage"]:has(img[alt*="👤"]) {
+    justify-content: flex-end !important;
+    flex-direction: row-reverse !important;
+    gap: 0.75rem !important;
+}
+
+/* AI MESSAGES - Left aligned */
+.stChatMessage:has([data-testid="stChatMessageAvatarAssistant"]),
+[data-testid="stChatMessage"]:has(img[alt*="🤖"]) {
+    justify-content: flex-start !important;
+    flex-direction: row !important;
+    gap: 0.75rem !important;
+}
+
+/* ALL AVATARS - Square badges */
+[data-testid="stChatMessageAvatar"],
+.stChatMessageAvatar {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    border-radius: 0.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    font-size: 0 !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* User avatar styling */
+.stChatMessage:has(img[alt*="👤"]) [data-testid="stChatMessageAvatar"],
+[data-testid="stChatMessage"]:has(img[alt*="👤"]) [data-testid="stChatMessageAvatar"] {
+    background: hsl(217.2, 91.2%, 59.8%, 0.15) !important;
+}
+
+/* User avatar "You" text */
+.stChatMessage:has(img[alt*="👤"]) [data-testid="stChatMessageAvatar"]::before,
+[data-testid="stChatMessage"]:has(img[alt*="👤"]) [data-testid="stChatMessageAvatar"]::before {
+    content: "You" !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: hsl(217.2, 91.2%, 59.8%) !important;
+    position: absolute !important;
+    z-index: 100 !important;
+}
+
+/* AI avatar styling */
+.stChatMessage:has(img[alt*="🤖"]) [data-testid="stChatMessageAvatar"],
+[data-testid="stChatMessage"]:has(img[alt*="🤖"]) [data-testid="stChatMessageAvatar"] {
+    background: hsl(217.2, 32.6%, 17.5%) !important;
+}
+
+/* AI avatar "AI" text */
+.stChatMessage:has(img[alt*="🤖"]) [data-testid="stChatMessageAvatar"]::before,
+[data-testid="stChatMessage"]:has(img[alt*="🤖"]) [data-testid="stChatMessageAvatar"]::before {
+    content: "AI" !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: hsl(215, 20.2%, 65.1%) !important;
+    position: absolute !important;
+    z-index: 100 !important;
+}
+
+/* Hide emoji images */
+[data-testid="stChatMessageAvatar"] img,
+[data-testid="stChatMessageAvatar"] svg {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* ALL MESSAGE BUBBLES */
+[data-testid="stChatMessageContent"],
+.stChatMessageContent {
+    border-radius: 1.25rem !important;
+    padding: 0.75rem 1rem !important;
+    max-width: 65% !important;
+    width: fit-content !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* USER MESSAGE BUBBLES - Blue */
+.stChatMessage:has(img[alt*="👤"]) [data-testid="stChatMessageContent"],
+[data-testid="stChatMessage"]:has(img[alt*="👤"]) [data-testid="stChatMessageContent"] {
+    background: hsl(217.2, 91.2%, 59.8%) !important;
+}
+
+.stChatMessage:has(img[alt*="👤"]) [data-testid="stChatMessageContent"] p,
+.stChatMessage:has(img[alt*="👤"]) [data-testid="stChatMessageContent"] div,
+[data-testid="stChatMessage"]:has(img[alt*="👤"]) [data-testid="stChatMessageContent"] p,
+[data-testid="stChatMessage"]:has(img[alt*="👤"]) [data-testid="stChatMessageContent"] div {
+    color: white !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+}
+
+/* AI MESSAGE BUBBLES - Dark gray */
+.stChatMessage:has(img[alt*="🤖"]) [data-testid="stChatMessageContent"],
+[data-testid="stChatMessage"]:has(img[alt*="🤖"]) [data-testid="stChatMessageContent"] {
+    background: hsl(217.2, 32.6%, 17.5%, 0.8) !important;
+}
+
+.stChatMessage:has(img[alt*="🤖"]) [data-testid="stChatMessageContent"] p,
+.stChatMessage:has(img[alt*="🤖"]) [data-testid="stChatMessageContent"] div,
+[data-testid="stChatMessage"]:has(img[alt*="🤖"]) [data-testid="stChatMessageContent"] p,
+[data-testid="stChatMessage"]:has(img[alt*="🤖"]) [data-testid="stChatMessageContent"] div {
+    color: hsl(210, 40%, 98%) !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+}
+
+/* AI model label above message */
+.ai-model-label {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: hsl(215, 20.2%, 65.1%) !important;
+    margin-bottom: 0.375rem !important;
+    display: block !important;
+}
+
+/* System messages - centered pill */
+.system-message {
+    display: flex !important;
+    justify-content: center !important;
+    padding: 0.75rem 0 !important;
+    margin: 0.5rem 0 !important;
+}
+
+.system-message-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.375rem !important;
+    border-radius: 9999px !important;
+    border: 1px solid hsl(217.2, 32.6%, 17.5%) !important;
+    background: hsl(217.2, 32.6%, 17.5%, 0.5) !important;
+    padding: 0.375rem 1rem !important;
+    font-size: 12px !important;
+    color: hsl(215, 20.2%, 65.1%) !important;
+}
+
+/* Thinking indicator */
+.thinking-container {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+.thinking-text {
+    font-size: 12px !important;
+    color: hsl(215, 20.2%, 65.1%) !important;
+}
+
+.thinking-dot {
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background: hsl(215, 20.2%, 65.1%, 0.6) !important;
+    animation: pulse-dot 1.4s ease-in-out infinite !important;
+}
+
+.thinking-dot:nth-child(2) { animation-delay: 0.15s !important; }
+.thinking-dot:nth-child(3) { animation-delay: 0.3s !important; }
+
+@keyframes pulse-dot {
+    0%, 80%, 100% { opacity: 0.4; }
+    40% { opacity: 1; }
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 1.5rem;
+    border-bottom: 1px solid hsl(217.2, 32.6%, 17.5%);
+    background: hsl(222.2, 84%, 4.9%);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 14px;
+    font-weight: 600;
+    color: hsl(210, 40%, 98%);
+}
+
+.model-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem !important;
+    border: 1px solid;
+    padding: 0.375rem 0.75rem;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.badge-groq {
+    border-color: hsl(25, 95%, 53%, 0.3);
+    background: hsl(25, 95%, 53%, 0.15);
+    color: hsl(25, 95%, 63%);
+}
+
+.badge-gemini {
+    border-color: hsl(217, 91%, 60%, 0.3);
+    background: hsl(217, 91%, 60%, 0.15);
+    color: hsl(217, 91%, 70%);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.latency-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 12px;
+    color: hsl(215, 20.2%, 65.1%);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid hsl(142, 71%, 45%, 0.3);
+    background: hsl(142, 71%, 45%, 0.1);
+    padding: 0.375rem 0.75rem;
+    font-size: 12px;
+    font-weight: 500;
+    color: hsl(142, 76%, 56%);
+}
+
+/* Token budget bar */
+.token-budget-container {
+    padding: 0.5rem 1.5rem;
+    border-top: 1px solid hsl(217.2, 32.6%, 17.5%);
+    background: hsl(222.2, 84%, 4.9%);
+}
+
+.token-budget-inner {
+    max-width: 56rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 12px;
+    color: hsl(215, 20.2%, 65.1%);
+}
+
+.token-progress-bar {
+    flex: 1;
+    height: 4px;
+    border-radius: 9999px;
+    background: hsl(217.2, 32.6%, 17.5%);
+    overflow: hidden;
+}
+
+.token-progress-fill {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.token-progress-normal { background: hsl(217.2, 91.2%, 59.8%); }
+.token-progress-warning { background: hsl(25, 95%, 53%); }
+.token-progress-danger { background: hsl(0, 84.2%, 60.2%); }
+
+/* Chat container */
+.chat-container {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+/* Input area */
+.input-container {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid hsl(217.2, 32.6%, 17.5%);
+    background: hsl(222.2, 84%, 4.9%);
+}
+
+.input-inner {
+    max-width: 56rem;
+    margin: 0 auto;
+}
+
+/* Streamlit chat input */
+.stChatInput {
+    background: transparent !important;
+}
+
+.stChatInput > div {
+    background: hsl(217.2, 32.6%, 17.5%, 0.5) !important;
+    border: 1px solid hsl(217.2, 32.6%, 17.5%) !important;
+    border-radius: 0.75rem !important;
+    padding: 0.75rem 1rem !important;
+}
+
+.stChatInput > div:focus-within {
+    border-color: hsl(217.2, 91.2%, 59.8%, 0.5) !important;
+    box-shadow: 0 0 0 1px hsl(217.2, 91.2%, 59.8%, 0.2) !important;
+}
+
+.stChatInput textarea {
+    color: hsl(210, 40%, 98%) !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+}
+
+.stChatInput textarea::placeholder {
+    color: hsl(215, 20.2%, 65.1%) !important;
+}
+
+.stChatInput button {
+    background: hsl(217.2, 91.2%, 59.8%) !important;
+    color: white !important;
+    border-radius: 0.5rem !important;
+}
+
+/* Input helper text */
+.input-helper {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 11px;
+    color: hsl(215, 20.2%, 65.1%, 0.6);
+}
+
+/* Buttons */
+.stButton > button {
+    background: hsl(217.2, 32.6%, 17.5%) !important;
+    color: hsl(210, 40%, 98%) !important;
+    border: 1px solid hsl(217.2, 32.6%, 17.5%) !important;
+    border-radius: 0.5rem !important;
+    font-weight: 600 !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 13px !important;
+    transition: all 0.2s !important;
+}
+
+.stButton > button:hover {
+    background: hsl(217.2, 32.6%, 22%) !important;
+    border-color: hsl(217.2, 91.2%, 59.8%, 0.3) !important;
+}
+
+.stButton > button[kind="primary"] {
+    background: hsl(217.2, 91.2%, 59.8%) !important;
+    border: 1px solid hsl(217.2, 91.2%, 59.8%) !important;
+    color: white !important;
+}
+
+.stButton > button[kind="primary"]:hover {
+    background: hsl(217.2, 91.2%, 55%) !important;
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 6rem 2rem;
+    color: hsl(210, 40%, 98%);
+}
+
+.empty-state-icon {
+    font-size: 72px;
+    margin-bottom: 1.5rem;
+    opacity: 0.4;
+}
+
+.empty-state-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: hsl(210, 40%, 98%);
+}
+
+.empty-state-subtitle {
+    font-size: 15px;
+    color: hsl(215, 20.2%, 65.1%);
+    line-height: 1.6;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+/* Sidebar specific styles */
+.sidebar-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid hsl(217.2, 32.6%, 17.5%);
+}
+
+.sidebar-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 14px;
+    font-weight: 600;
+    color: hsl(210, 40%, 98%);
+}
+
+.sidebar-content {
+    padding: 1.25rem;
+}
+
+.sidebar-section {
+    margin-bottom: 2rem;
+}
+
+.section-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: hsl(215, 20.2%, 65.1%);
+    margin-bottom: 0.75rem;
+}
