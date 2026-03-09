@@ -7,11 +7,13 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.32+-FF4B4B?style=flat&logo=streamlit&logoColor=white)
 ![Groq](https://img.shields.io/badge/Groq-API-F55036?style=flat)
 ![Gemini](https://img.shields.io/badge/Gemini-API-4285F4?style=flat&logo=google&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat)
+
 ---
 
 ## 🧠 What is AI Context Manager?
 
- **AI Context Manager** is an LLM Bridge that solves one of the biggest friction points for AI power users — the need to manually transfer conversation history when switching between language models.
+**AI Context Manager** is an LLM Bridge that solves one of the biggest friction points for AI power users — the need to manually transfer conversation history when switching between language models.
 
 Whether you hit a token limit on one model or simply need a different model's strengths mid-task, LLM Bridge keeps your conversation intact and hands it off seamlessly.
 
@@ -38,6 +40,16 @@ If you've ever:
 - 🥊 **Debate Mode** — Structured multi-round discussions between two AI models
 - 📤 **Export Conversations** — Save sessions as Markdown for future reference
 - 🎨 **Dark-Mode First** — Minimal, professional interface built for deep work sessions
+
+### 🗂️ Sidebar Controls
+- 🔥 **Model Selector** — Switch between Groq (Llama 3.1) and Gemini (2.0 Flash) with one click; active model is highlighted
+- 🧠 **Context Strategy** — Three modes to control how much history is sent to the model:
+  - `Full` — Entire conversation sent as-is
+  - `Summary + 5` — Summarized context plus last 5 messages
+  - `Last 5` — Only the 5 most recent messages (token-efficient)
+- 👁️ **Context Preview** — Live preview of the conversation history being injected into the active model
+- 📊 **Token Budget Bar** — Real-time token usage tracker with color-coded status (green → yellow → red) relative to each model's limit (16k for Groq, 200k for Gemini)
+- 🗑️ **Reset Context** — One-click conversation and context wipe to start fresh
 
 ---
 
@@ -153,7 +165,7 @@ git push origin feature/your-feature-name
 
 **Kshitij** · Product Manager & Builder
 - GitHub: [@iamkshitij](https://github.com/iamkshitij)
-- LinkedIn: [modikshitij](https://linkedin.com/in/modikshitij)
+- LinkedIn: [modikshitij](https://www.linkedin.com/in/modikshitij)
 
 ---
 
