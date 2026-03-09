@@ -7,8 +7,6 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.32+-FF4B4B?style=flat&logo=streamlit&logoColor=white)
 ![Groq](https://img.shields.io/badge/Groq-API-F55036?style=flat)
 ![Gemini](https://img.shields.io/badge/Gemini-API-4285F4?style=flat&logo=google&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat)
-
 ---
 
 ## 🧠 What is AI Context Manager?
