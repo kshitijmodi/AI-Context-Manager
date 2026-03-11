@@ -107,6 +107,17 @@ Winner: Groq
 - A [Groq API key](https://console.groq.com)
 - A [Gemini API key](https://aistudio.google.com)
 
+### Automatic deployment to Hugging Face Space
+
+- This repo is wired so that **every push to the `main` branch on GitHub automatically mirrors the code to the Hugging Face Space** `iamkshitij/AI-Context-Manager`.
+- The GitHub Actions workflow at `.github/workflows/deploy-hf.yml`:
+  - Runs on `push` to `main`.
+  - Uses the repository secret `GH_HF_AICONTEXTMGR` as the Hugging Face access token.
+  - Pushes the `main` branch to `https://huggingface.co/spaces/iamkshitij/AI-Context-Manager`.
+- To (re)configure in GitHub:
+  - Go to **Settings → Secrets and variables → Actions**.
+  - Add or update a **Repository secret** named `GH_HF_AICONTEXTMGR` with a valid Hugging Face access token that has write permission to the Space.
+
 ### Installation
 
 ```bash

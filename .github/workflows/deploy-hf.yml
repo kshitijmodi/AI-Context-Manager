@@ -21,6 +21,15 @@ jobs:
       - name: Push to HuggingFace
         env:
           HF_TOKEN: ${{ secrets.GH_HF_AICONTEXTMGR }}
+          HF_USERNAME: iamkshitij
+          HF_SPACE: AI-Context-Manager
         run: |
-          git remote add hf https://iamkshitij:$HF_TOKEN@huggingface.co/spaces/iamkshitij/AI-Context-Manager
+          # Ensure hf remote exists and points to the right Space
+          if git remote get-url hf >/dev/null 2>&1; then
+            git remote set-url hf https://$HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/$HF_USERNAME/$HF_SPACE
+          else
+            git remote add hf https://$HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/$HF_USERNAME/$HF_SPACE
+          fi
+
+          # Mirror the main branch to the Space
           git push hf main --force
