@@ -1,3 +1,15 @@
+---
+title: AI Context Manager
+emoji: 💬
+colorFrom: blue
+colorTo: purple
+sdk: streamlit
+sdk_version: "1.32.0"
+python_version: "3.10"
+app_file: app.py
+pinned: false
+---
+
 # 🌉 AI Context Manager
 ### AI Context Manager — Seamless Cross-Model Conversations
 > Switch between AI models mid-conversation without losing context. No copy-pasting. No re-prompting. Just flow.
