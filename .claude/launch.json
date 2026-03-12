@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "app",
+      "runtimeExecutable": "streamlit",
+      "runtimeArgs": ["run", "app.py", "--server.port", "8501"],
+      "port": 8501
+    },
+    {
+      "name": "main",
+      "runtimeExecutable": "streamlit",
+      "runtimeArgs": ["run", "main.py", "--server.port", "8502"],
+      "port": 8502
+    },
+    {
+      "name": "llmbridge2",
+      "runtimeExecutable": "streamlit",
+      "runtimeArgs": ["run", "llmbridge2.py", "--server.port", "8503"],
+      "port": 8503
+    }
+  ]
+}

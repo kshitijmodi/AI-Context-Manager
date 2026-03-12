@@ -310,6 +310,40 @@ st.markdown("""
     .stChatInput textarea::placeholder {
         color: rgba(255, 255, 255, 0.4) !important;
     }
+
+    /* ============ TOKEN BAR ============ */
+    .token-bar {
+        padding: 6px 4px;
+    }
+    .token-bar-inner {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.38);
+    }
+    .token-track {
+        flex: 1;
+        height: 3px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+    }
+    .token-fill {
+        height: 100%;
+        border-radius: 999px;
+        transition: width .3s;
+    }
+    .fill-ok   { background: #4f46e5; }
+    .fill-warn { background: #f59e0b; }
+    .fill-bad  { background: #ef4444; }
+
+    /* Collapse Streamlit's wrapper so the bar takes only its natural height */
+    .element-container:has(.token-bar) {
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 0 !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -444,6 +478,9 @@ def send_message(user_input):
     st.session_state.context_history.append({"role": "User", "content": user_input})
     st.session_state.context_history.append({"role": st.session_state.active_llm.capitalize(), "content": response})
 
+def estimate_tokens(text): return max(1, len(text) // 4)
+def get_context_tokens(): return sum(estimate_tokens(m['content']) for m in st.session_state.context_history[-8:])
+
 # ==================== CHAT WINDOW ====================
 chat_window = st.container(border=True)
 
@@ -531,8 +568,21 @@ with chat_window:
                     </div>
                     ''', unsafe_allow_html=True)
 
-    # Input area at the bottom of the chat window
-    st.markdown('<div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 12px; margin-top: 12px;"></div>', unsafe_allow_html=True)
+    # Token bar + divider
+    _ctx_tokens  = get_context_tokens()
+    _token_limit = 16000 if st.session_state.active_llm == 'groq' else 200000
+    _pct         = min(100, _ctx_tokens / _token_limit * 100)
+    _fill_cls    = "fill-bad" if _pct > 80 else "fill-warn" if _pct > 50 else "fill-ok"
+    st.markdown(f"""
+<div class="token-bar">
+  <div class="token-bar-inner">
+    <span>Token budget: {_ctx_tokens:,} / {_token_limit // 1000}k</span>
+    <div class="token-track"><div class="token-fill {_fill_cls}" style="width:{_pct:.1f}%"></div></div>
+    <span>{_pct:.1f}%</span>
+  </div>
+</div>
+<div style="border-top:1px solid rgba(255,255,255,0.1);margin-top:6px;margin-bottom:6px;"></div>
+""", unsafe_allow_html=True)
 
     def on_send():
         user_input = st.session_state.input
