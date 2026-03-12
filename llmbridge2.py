@@ -344,6 +344,17 @@ st.markdown("""
         padding: 0 !important;
         line-height: 0 !important;
     }
+
+    /* Remove gap between token bar and chat input */
+    .element-container:has(.token-bar) + div,
+    .element-container:has(.token-bar) ~ div {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+    .stChatInput {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
