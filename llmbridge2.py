@@ -380,7 +380,7 @@ try:
     groq_client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
     if GEMINI_API_KEY:
         genai.configure(api_key=GEMINI_API_KEY)
-        gemini_model = genai.GenerativeModel('gemini-2.5-flash-lite')
+        gemini_model = genai.GenerativeModel('gemini-2.0-flash-lite')
     else:
         gemini_model = None
 except:
@@ -581,12 +581,12 @@ with chat_window:
                     </div>
                     ''', unsafe_allow_html=True)
 
-    # Token bar + divider
-    _ctx_tokens  = get_context_tokens()
-    _token_limit = 16000 if st.session_state.active_llm == 'groq' else 200000
-    _pct         = min(100, _ctx_tokens / _token_limit * 100)
-    _fill_cls    = "fill-bad" if _pct > 80 else "fill-warn" if _pct > 50 else "fill-ok"
-    st.markdown(f"""
+# Token bar + divider (outside bordered container to eliminate gap)
+_ctx_tokens  = get_context_tokens()
+_token_limit = 16000 if st.session_state.active_llm == 'groq' else 200000
+_pct         = min(100, _ctx_tokens / _token_limit * 100)
+_fill_cls    = "fill-bad" if _pct > 80 else "fill-warn" if _pct > 50 else "fill-ok"
+st.markdown(f"""
 <div class="token-bar">
   <div class="token-bar-inner">
     <span>Token budget: {_ctx_tokens:,} / {_token_limit // 1000}k</span>
@@ -594,15 +594,14 @@ with chat_window:
     <span>{_pct:.1f}%</span>
   </div>
 </div>
-<div style="border-top:1px solid rgba(255,255,255,0.1);margin-top:6px;margin-bottom:6px;"></div>
 """, unsafe_allow_html=True)
 
-    def on_send():
-        user_input = st.session_state.input
-        if user_input and not st.session_state.processing:
-            st.session_state.processing = True
-            send_message(user_input)
-            st.session_state.processing = False
+def on_send():
+    user_input = st.session_state.input
+    if user_input and not st.session_state.processing:
+        st.session_state.processing = True
+        send_message(user_input)
+        st.session_state.processing = False
 
-    active_llm = "🔥 Groq" if st.session_state.active_llm == 'groq' else "✨ Gemini"
-    st.chat_input(f"Message {active_llm}...", key="input", on_submit=on_send, disabled=st.session_state.processing)
+active_llm = "🔥 Groq" if st.session_state.active_llm == 'groq' else "✨ Gemini"
+st.chat_input(f"Message {active_llm}...", key="input", on_submit=on_send, disabled=st.session_state.processing)
