@@ -62,11 +62,28 @@ button[data-testid="baseButton-secondary"][kind="secondary"] svg { color: #7c7c9
 }
 .stButton > button[kind="primary"]:hover { background: #8f6cf7 !important; }
 
-/* Selectbox */
-.stSelectbox > div > div {
+/* Selectbox — kill white bg everywhere */
+.stSelectbox > div > div,
+[data-baseweb="select"] > div,
+[data-baseweb="select"] > div > div {
     background: #13131f !important;
     border: 1px solid #2a2a40 !important;
     color: #ddddf0 !important; border-radius: 8px !important;
+    cursor: pointer !important;
+}
+[data-baseweb="select"] { cursor: pointer !important; }
+[data-baseweb="select"]:hover > div { border-color: #3a3a58 !important; }
+/* Dropdown list panel */
+[data-baseweb="popover"] [data-baseweb="menu"],
+[data-baseweb="popover"] ul,
+[role="listbox"] {
+    background: #13131f !important;
+    border: 1px solid #2a2a40 !important;
+    border-radius: 8px !important;
+}
+[role="option"] { background: #13131f !important; color: #ddddf0 !important; cursor: pointer !important; }
+[role="option"]:hover,[role="option"][aria-selected="true"] {
+    background: #1e1e30 !important; color: #a590f8 !important;
 }
 
 /* Labels / captions */
@@ -87,15 +104,28 @@ button[data-testid="baseButton-secondary"][kind="secondary"] svg { color: #7c7c9
 /* Context preview code block */
 [data-testid="stCode"], .stCode, .stCodeBlock { background: transparent !important; }
 [data-testid="stCode"] pre, .stCodeBlock pre, .stCode pre {
-    background: #13131f !important;
-    color: #8888aa !important;
-    border: 1px solid #1e1e2e !important;
+    background: #0a0a14 !important;
+    color: #39d5ff !important;
+    text-shadow: 0 0 8px rgba(57,213,255,0.35) !important;
+    border: 1px solid rgba(57,213,255,0.15) !important;
     border-radius: 8px !important;
     font-size: 11px !important;
     line-height: 1.6 !important;
 }
 /* Hide copy button on code block */
 [data-testid="stCode"] button { display: none !important; }
+
+/* Reset context button — sentinel-based targeting */
+.element-container:has(#reset-sentinel) + .element-container .stButton > button {
+    background: rgba(239,68,68,0.1) !important;
+    border: 1px solid rgba(239,68,68,0.35) !important;
+    color: #f87171 !important;
+}
+.element-container:has(#reset-sentinel) + .element-container .stButton > button:hover {
+    background: rgba(239,68,68,0.22) !important;
+    border-color: rgba(239,68,68,0.6) !important;
+    color: #fca5a5 !important;
+}
 
 /* Progress bar */
 .stProgress > div > div { background: #1e1e2e !important; }
@@ -343,12 +373,13 @@ def esc(text):
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown(
-        '<div style="padding:22px 16px 18px;border-bottom:1px solid #252540;text-align:center">'
-        '<div style="font-size:22px;font-weight:800;letter-spacing:-0.04em;line-height:1.1;'
-        'background:linear-gradient(135deg,#a590f8 0%,#38c0f8 100%);'
-        '-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">'
+        '<div style="padding:24px 16px 20px;border-bottom:1px solid #252540;text-align:center">'
+        '<div style="font-size:26px;font-weight:900;letter-spacing:-0.05em;line-height:1.1;'
+        'background:linear-gradient(135deg,#ff9a3c 0%,#ffd166 60%,#ff6f61 100%);'
+        '-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;'
+        'filter:drop-shadow(0 0 12px rgba(255,154,60,0.4))">'
         'AI Context Manager</div>'
-        '<div style="font-size:11px;color:#3a3a5a;margin-top:5px;letter-spacing:.6px;text-transform:uppercase">'
+        '<div style="font-size:10px;color:#3a3a5a;margin-top:6px;letter-spacing:.8px;text-transform:uppercase">'
         'Cross-model conversations</div>'
         '</div>',
         unsafe_allow_html=True
@@ -359,56 +390,67 @@ with st.sidebar:
     is_discussion = st.session_state.app_mode == 'discussion'
     active_llm_now = st.session_state.active_llm
 
-    # Active tab colors: Discussion=violet, Debate=purple
-    active_tab_bg     = "rgba(124,90,245,0.18)"  if is_discussion else "rgba(192,132,252,0.15)"
-    active_tab_color  = "#a590f8"                if is_discussion else "#c084fc"
-    active_tab_border = "rgba(124,90,245,0.35)"  if is_discussion else "rgba(192,132,252,0.3)"
+    # Active tab colors
+    disc_bg  = "rgba(124,90,245,0.28)"  if is_discussion else "rgba(255,255,255,0.04)"
+    disc_col = "#c4b3ff"                if is_discussion else "#6666a0"
+    disc_bdr = "rgba(124,90,245,0.55)" if is_discussion else "rgba(255,255,255,0.06)"
+    deb_bg   = "rgba(192,132,252,0.22)" if not is_discussion else "rgba(255,255,255,0.04)"
+    deb_col  = "#e4b4ff"                if not is_discussion else "#6666a0"
+    deb_bdr  = "rgba(192,132,252,0.5)" if not is_discussion else "rgba(255,255,255,0.06)"
 
     # Active model button colors: Groq=orange, Gemini=teal
-    model_bg    = "rgba(251,146,60,0.12)"  if active_llm_now == 'groq' else "rgba(56,189,248,0.12)"
+    model_bg    = "rgba(251,146,60,0.18)"  if active_llm_now == 'groq' else "rgba(56,189,248,0.15)"
     model_color = "#f59044"                if active_llm_now == 'groq' else "#38c0f8"
-    model_bdr   = "rgba(251,146,60,0.35)" if active_llm_now == 'groq' else "rgba(56,189,248,0.3)"
+    model_bdr   = "rgba(251,146,60,0.5)"  if active_llm_now == 'groq' else "rgba(56,189,248,0.45)"
+    model_shadow = "0 0 10px rgba(251,146,60,0.2)" if active_llm_now == 'groq' else "0 0 10px rgba(56,189,248,0.15)"
 
     st.markdown(f"""
     <style>
     /* Mode tab pill container */
     div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] {{
-        background: #13131f;
+        background: #0c0c18;
         border: 1px solid #1e1e2e;
         border-radius: 10px;
         padding: 3px;
         gap: 2px !important;
     }}
+    /* Unselected tab base */
     div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] .stButton > button {{
         background: transparent !important;
         border: none !important;
         border-radius: 7px !important;
-        color: #4a4a66 !important;
         font-size: 12px !important;
-        font-weight: 600 !important;
-        padding: 6px 0 !important;
-        transition: all .15s ease !important;
+        font-weight: 700 !important;
+        padding: 7px 0 !important;
+        transition: all .18s ease !important;
         width: 100% !important;
+        letter-spacing: .2px !important;
     }}
     div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] .stButton > button:hover {{
-        background: #1e1e2e !important;
-        color: #9898bb !important;
+        background: #1e1e30 !important;
+        color: #9898cc !important;
     }}
-    /* Active tab */
-    div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] .stButton:{'first' if is_discussion else 'last'}-of-type > button {{
-        background: {active_tab_bg} !important;
-        color: {active_tab_color} !important;
-        border: 1px solid {active_tab_border} !important;
+    /* Discussion tab */
+    div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] .stButton:first-of-type > button {{
+        background: {disc_bg} !important;
+        color: {disc_col} !important;
+        border: 1px solid {disc_bdr} !important;
     }}
-    /* Active model button — only one is type=primary at a time */
+    /* Debate tab */
+    div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] .stButton:last-of-type > button {{
+        background: {deb_bg} !important;
+        color: {deb_col} !important;
+        border: 1px solid {deb_bdr} !important;
+    }}
+    /* Active model button */
     section[data-testid="stSidebar"] .stButton > button[kind="primary"] {{
         background: {model_bg} !important;
         border: 1px solid {model_bdr} !important;
         color: {model_color} !important;
-        box-shadow: none !important;
+        box-shadow: {model_shadow} !important;
     }}
     section[data-testid="stSidebar"] .stButton > button[kind="primary"]:hover {{
-        opacity: 0.85 !important;
+        opacity: 0.88 !important;
     }}
     </style>
     """, unsafe_allow_html=True)
@@ -482,7 +524,7 @@ with st.sidebar:
     st.progress(pct / 100)
     st.caption(f"{pct:.1f}%")
 
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown('<br><span id="reset-sentinel"></span>', unsafe_allow_html=True)
     if st.button("🗑️ Reset context", use_container_width=True):
         st.session_state.conversation = []
         st.session_state.context_history = []
@@ -508,7 +550,7 @@ else:
 st.markdown(f"""
 <div class="app-header">
   <div style="display:flex;align-items:center;gap:12px">
-    <span style="font-size:22px;font-weight:800;letter-spacing:-0.04em;line-height:1;background:linear-gradient(135deg,#a590f8 0%,#38c0f8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">AI Context Manager</span>
+    <span style="font-size:24px;font-weight:900;letter-spacing:-0.05em;line-height:1;background:linear-gradient(135deg,#ff9a3c 0%,#ffd166 60%,#ff6f61 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 10px rgba(255,154,60,0.35))">AI Context Manager</span>
     {header_badge}
   </div>
   <div style="display:flex;align-items:center;gap:14px">
