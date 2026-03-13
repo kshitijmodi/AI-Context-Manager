@@ -7,8 +7,8 @@ import os
 VERSION = "13.0"
 
 st.set_page_config(
-    page_title="LLM Bridge",
-    page_icon="⚡",
+    page_title="AI Context Manager",
+    page_icon="🔄",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -38,11 +38,12 @@ body, .stApp { background: #0c0c15 !important; }
 /* Sidebar */
 section[data-testid="stSidebar"] {
     display: block !important; visibility: visible !important;
-    background: #0c0c15 !important;
-    border-right: 1px solid #1e1e2e !important;
+    background: #0e0e1a !important;
+    border-right: 2px solid #252540 !important;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.5) !important;
 }
 section[data-testid="stSidebar"] > div,
-[data-testid="stSidebarContent"] { background: #0c0c15 !important; }
+[data-testid="stSidebarContent"] { background: #0e0e1a !important; }
 
 /* Sidebar collapse toggle button (the arrow) */
 button[data-testid="baseButton-secondary"][kind="secondary"] svg { color: #7c7c99 !important; }
@@ -344,30 +345,44 @@ def esc(text):
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown(
-        '<div style="padding:14px 16px;border-bottom:1px solid #1e1e2e;'
-        'font-size:15px;font-weight:700;color:#ddddf0">⚡ LLM Bridge</div>',
+        '<div style="padding:14px 16px;border-bottom:1px solid #252540;'
+        'font-size:15px;font-weight:700;color:#ddddf0;letter-spacing:-0.02em">🔄 AI Context Manager</div>',
         unsafe_allow_html=True
     )
     st.markdown('<div style="padding:16px">', unsafe_allow_html=True)
 
     # ── Mode tabs ──
     is_discussion = st.session_state.app_mode == 'discussion'
+    active_llm_now = st.session_state.active_llm
+
+    # Active tab colors: Discussion=violet, Debate=purple
+    active_tab_bg     = "rgba(124,90,245,0.18)"  if is_discussion else "rgba(192,132,252,0.15)"
+    active_tab_color  = "#a590f8"                if is_discussion else "#c084fc"
+    active_tab_border = "rgba(124,90,245,0.35)"  if is_discussion else "rgba(192,132,252,0.3)"
+
+    # Active model button colors: Groq=orange, Gemini=teal
+    model_bg    = "rgba(251,146,60,0.12)"  if active_llm_now == 'groq' else "rgba(56,189,248,0.12)"
+    model_color = "#f59044"                if active_llm_now == 'groq' else "#38c0f8"
+    model_bdr   = "rgba(251,146,60,0.35)" if active_llm_now == 'groq' else "rgba(56,189,248,0.3)"
+
     st.markdown(f"""
     <style>
+    /* Mode tab pill container */
     div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] {{
         background: #13131f;
-        border-radius: 8px;
+        border: 1px solid #1e1e2e;
+        border-radius: 10px;
         padding: 3px;
         gap: 2px !important;
     }}
     div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] .stButton > button {{
         background: transparent !important;
         border: none !important;
-        border-radius: 6px !important;
+        border-radius: 7px !important;
         color: #4a4a66 !important;
         font-size: 12px !important;
         font-weight: 600 !important;
-        padding: 5px 0 !important;
+        padding: 6px 0 !important;
         transition: all .15s ease !important;
         width: 100% !important;
     }}
@@ -375,9 +390,21 @@ with st.sidebar:
         background: #1e1e2e !important;
         color: #9898bb !important;
     }}
+    /* Active tab */
     div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] .stButton:{'first' if is_discussion else 'last'}-of-type > button {{
-        background: #2a2a40 !important;
-        color: #ddddf0 !important;
+        background: {active_tab_bg} !important;
+        color: {active_tab_color} !important;
+        border: 1px solid {active_tab_border} !important;
+    }}
+    /* Active model button — only one is type=primary at a time */
+    section[data-testid="stSidebar"] .stButton > button[kind="primary"] {{
+        background: {model_bg} !important;
+        border: 1px solid {model_bdr} !important;
+        color: {model_color} !important;
+        box-shadow: none !important;
+    }}
+    section[data-testid="stSidebar"] .stButton > button[kind="primary"]:hover {{
+        opacity: 0.85 !important;
     }}
     </style>
     """, unsafe_allow_html=True)
@@ -432,7 +459,7 @@ with st.sidebar:
             '<div style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);'
             'border-radius:10px;padding:12px;font-size:13px;color:hsl(271,91%,80%);line-height:1.6">'
             '⚔️ <b>Debate Mode</b><br>'
-            '<span style="color:hsl(215,20.2%,65.1%)">Enter any topic. Gemini and Groq will '
+            '<span style="color:#7c7c99">Enter any topic. Gemini and Groq will '
             'argue 3 rounds each, then an LLM judge delivers the verdict.</span>'
             '</div>',
             unsafe_allow_html=True
@@ -476,10 +503,13 @@ else:
 
 st.markdown(f"""
 <div class="app-header">
-  {header_badge}
+  <div style="display:flex;align-items:center;gap:12px">
+    <span style="font-size:18px;font-weight:800;color:#ddddf0;letter-spacing:-0.03em">🔄 AI Context Manager</span>
+    {header_badge}
+  </div>
   <div style="display:flex;align-items:center;gap:14px">
-    <span style="font-size:12px;color:hsl(215,20.2%,65.1%)">{latency_label}</span>
-    <div class="status-pill">● Bridge: Connected</div>
+    <span style="font-size:12px;color:#5a5a7a">{latency_label}</span>
+    <div class="status-pill">● Connected</div>
   </div>
 </div>
 """, unsafe_allow_html=True)
