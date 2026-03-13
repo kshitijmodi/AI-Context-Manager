@@ -166,18 +166,16 @@ for k, v in defaults.items():
 GROQ_API_KEY   = os.environ.get('GROQ_API_KEY')
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 
-try:
-    groq_client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
-    if GEMINI_API_KEY:
-        genai.configure(api_key=GEMINI_API_KEY)
-        gemini_model = genai.GenerativeModel('gemini-2.5-flash-lite')
-    else:
-        gemini_model = None
-except Exception:
-    groq_client = gemini_model = None
-
 if not GROQ_API_KEY or not GEMINI_API_KEY:
-    st.error("⚠️ Add GROQ_API_KEY and GEMINI_API_KEY to environment variables")
+    st.error("⚠️ Add GROQ_API_KEY and GEMINI_API_KEY to HF Space secrets (Settings → Variables and secrets)")
+    st.stop()
+
+try:
+    groq_client = Groq(api_key=GROQ_API_KEY)
+    genai.configure(api_key=GEMINI_API_KEY)
+    gemini_model = genai.GenerativeModel('gemini-2.0-flash-lite')
+except Exception as e:
+    st.error(f"⚠️ API init failed: {e}")
     st.stop()
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
