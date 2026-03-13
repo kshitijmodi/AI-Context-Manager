@@ -119,10 +119,14 @@ button[data-testid="baseButton-secondary"][kind="secondary"] svg { color: hsl(21
 
 
 
-/* Fix token bar overlap with chat input */
-.stChatInputContainer, [data-testid="stChatInput"] {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
+/* Token bar — ensure it sits above the sticky chat input */
+.element-container:has(.token-bar) {
+    margin-bottom: 4px !important;
+}
+[data-testid="stBottom"] {
+    background: hsl(222.2,84%,4.9%);
+    padding-top: 4px !important;
+    padding-bottom: 8px !important;
 }
 </style>
 """, unsafe_allow_html=True)
