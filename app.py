@@ -18,7 +18,7 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-body, .stApp { background: hsl(222.2,84%,4.9%) !important; }
+body, .stApp { background: #0c0c15 !important; }
 #MainMenu, footer, header, .stDeployButton,
 [data-testid="stHeader"],[data-testid="stDecoration"],
 [data-testid="stToolbar"] { display:none !important; }
@@ -27,107 +27,123 @@ body, .stApp { background: hsl(222.2,84%,4.9%) !important; }
 [data-testid="collapsedControl"] {
     display: flex !important;
     visibility: visible !important;
-    background: hsl(222.2,84%,4.9%) !important;
-    border-right: 1px solid hsl(217.2,32.6%,17.5%) !important;
-    color: hsl(215,20.2%,65.1%) !important;
+    background: #0c0c15 !important;
+    border-right: 1px solid #1e1e2e !important;
+    color: #7c7c99 !important;
 }
-[data-testid="collapsedControl"] svg { color: hsl(215,20.2%,65.1%) !important; fill: hsl(215,20.2%,65.1%) !important; }
+[data-testid="collapsedControl"] svg { color: #7c7c99 !important; fill: #7c7c99 !important; }
 
 .block-container { padding: 0 !important; max-width: 100% !important; }
 
 /* Sidebar */
 section[data-testid="stSidebar"] {
     display: block !important; visibility: visible !important;
-    background: hsl(222.2,84%,4.9%) !important;
-    border-right: 1px solid hsl(217.2,32.6%,17.5%) !important;
+    background: #0c0c15 !important;
+    border-right: 1px solid #1e1e2e !important;
 }
 section[data-testid="stSidebar"] > div,
-[data-testid="stSidebarContent"] { background: hsl(222.2,84%,4.9%) !important; }
+[data-testid="stSidebarContent"] { background: #0c0c15 !important; }
 
 /* Sidebar collapse toggle button (the arrow) */
-button[data-testid="baseButton-secondary"][kind="secondary"] svg { color: hsl(215,20.2%,65.1%) !important; }
+button[data-testid="baseButton-secondary"][kind="secondary"] svg { color: #7c7c99 !important; }
 
 /* Buttons */
 .stButton > button {
-    background: hsl(217.2,32.6%,17.5%) !important;
-    color: hsl(210,40%,98%) !important;
-    border: 1px solid hsl(217.2,32.6%,22%) !important;
+    background: #181826 !important;
+    color: #ddddf0 !important;
+    border: 1px solid #2a2a40 !important;
     border-radius: 8px !important; font-weight: 600 !important; transition: all .2s !important;
 }
-.stButton > button:hover { background: hsl(217.2,32.6%,22%) !important; }
+.stButton > button:hover { background: #22223a !important; border-color: #3a3a58 !important; }
 .stButton > button[kind="primary"] {
-    background: hsl(217.2,91.2%,59.8%) !important;
-    border-color: hsl(217.2,91.2%,59.8%) !important; color: white !important;
+    background: #7c5af5 !important;
+    border-color: #7c5af5 !important; color: white !important;
 }
+.stButton > button[kind="primary"]:hover { background: #8f6cf7 !important; }
 
 /* Selectbox */
 .stSelectbox > div > div {
-    background: hsl(217.2,32.6%,14%) !important;
-    border: 1px solid hsl(217.2,32.6%,22%) !important;
-    color: hsl(210,40%,98%) !important; border-radius: 8px !important;
+    background: #13131f !important;
+    border: 1px solid #2a2a40 !important;
+    color: #ddddf0 !important; border-radius: 8px !important;
 }
 
 /* Labels / captions */
 .stMarkdown p, .stCaption,
 [data-testid="stSidebarContent"] p,
 [data-testid="stSidebarContent"] span,
-[data-testid="stSidebarContent"] label { color: hsl(215,20.2%,65.1%) !important; }
+[data-testid="stSidebarContent"] label { color: #7c7c99 !important; }
 
 /* Chat input */
 .stChatInput > div {
-    background: hsl(217.2,32.6%,14%) !important;
-    border: 1px solid hsl(217.2,32.6%,22%) !important; border-radius: 12px !important;
+    background: #13131f !important;
+    border: 1px solid #2a2a40 !important; border-radius: 12px !important;
 }
-.stChatInput textarea { color: hsl(210,40%,98%) !important; }
-.stChatInput textarea::placeholder { color: hsl(215,20.2%,65.1%) !important; }
+.stChatInput > div:focus-within { border-color: #7c5af5 !important; box-shadow: 0 0 0 2px rgba(124,90,245,0.15) !important; }
+.stChatInput textarea { color: #ddddf0 !important; background: transparent !important; }
+.stChatInput textarea::placeholder { color: #4a4a66 !important; }
+
+/* Context preview code block */
+[data-testid="stCode"], .stCode, .stCodeBlock { background: transparent !important; }
+[data-testid="stCode"] pre, .stCodeBlock pre, .stCode pre {
+    background: #13131f !important;
+    color: #8888aa !important;
+    border: 1px solid #1e1e2e !important;
+    border-radius: 8px !important;
+    font-size: 11px !important;
+    line-height: 1.6 !important;
+}
+/* Hide copy button on code block */
+[data-testid="stCode"] button { display: none !important; }
+
+/* Progress bar */
+.stProgress > div > div { background: #1e1e2e !important; }
+.stProgress > div > div > div { background: #7c5af5 !important; }
 
 /* Section label */
 .section-label {
     font-size:11px; font-weight:600; text-transform:uppercase;
-    letter-spacing:.5px; color:hsl(215,20.2%,65.1%); margin-bottom:8px;
+    letter-spacing:.5px; color:#5a5a7a; margin-bottom:8px;
 }
 
 /* Header */
 .app-header {
     display:flex; align-items:center; justify-content:space-between;
     height:52px; padding:0 1.25rem;
-    border-bottom:1px solid hsl(217.2,32.6%,17.5%);
-    background:hsl(222.2,84%,4.9%);
+    border-bottom:1px solid #1e1e2e;
+    background:#0c0c15;
 }
 .model-badge {
     display:inline-flex; align-items:center; gap:6px;
     border-radius:6px; border:1px solid; padding:4px 10px;
     font-size:12px; font-weight:500;
 }
-.badge-groq    { border-color:rgba(251,146,60,0.3);  background:rgba(251,146,60,0.12);  color:hsl(25,95%,63%); }
-.badge-gemini  { border-color:rgba(96,165,250,0.3);  background:rgba(96,165,250,0.12);  color:hsl(217,91%,70%); }
-.badge-debate  { border-color:rgba(168,85,247,0.3);  background:rgba(168,85,247,0.12);  color:hsl(271,91%,75%); }
+.badge-groq    { border-color:rgba(251,146,60,0.3);  background:rgba(251,146,60,0.08);  color:#f59044; }
+.badge-gemini  { border-color:rgba(56,189,248,0.3);  background:rgba(56,189,248,0.08);  color:#38c0f8; }
+.badge-debate  { border-color:rgba(168,85,247,0.3);  background:rgba(168,85,247,0.08);  color:#c084fc; }
 .status-pill {
     display:flex; align-items:center; gap:6px;
-    border:1px solid rgba(34,197,94,0.3); background:rgba(34,197,94,0.1);
-    border-radius:999px; padding:4px 12px; font-size:12px; color:hsl(142,76%,56%);
+    border:1px solid rgba(52,211,153,0.25); background:rgba(52,211,153,0.08);
+    border-radius:999px; padding:4px 12px; font-size:12px; color:#34d399;
 }
 
 /* Token bar */
-.token-bar { padding:6px 1.25rem; border-top:1px solid hsl(217.2,32.6%,17.5%); background:hsl(222.2,84%,4.9%); }
-.token-bar-inner { display:flex; align-items:center; gap:12px; font-size:12px; color:hsl(215,20.2%,65.1%); }
-.token-track { flex:1; height:4px; border-radius:999px; background:hsl(217.2,32.6%,17.5%); overflow:hidden; }
+.token-bar { padding:6px 1.25rem; border-top:1px solid #1e1e2e; background:#0c0c15; }
+.token-bar-inner { display:flex; align-items:center; gap:12px; font-size:12px; color:#5a5a7a; }
+.token-track { flex:1; height:3px; border-radius:999px; background:#1e1e2e; overflow:hidden; }
 .token-fill  { height:100%; border-radius:999px; transition:width .3s; }
-.fill-ok   { background:hsl(217.2,91.2%,59.8%); }
-.fill-warn { background:hsl(25,95%,53%); }
-.fill-bad  { background:hsl(0,84.2%,60.2%); }
+.fill-ok   { background:#7c5af5; }
+.fill-warn { background:#f59044; }
+.fill-bad  { background:#f05a5a; }
 
-
-
-/* Token bar — ensure it sits above the sticky chat input */
-.element-container:has(.token-bar) {
-    margin-bottom: 4px !important;
-}
+/* Token bar spacing + sticky chat input background */
+.element-container:has(.token-bar) { margin-bottom: 4px !important; }
 [data-testid="stBottom"] {
-    background: hsl(222.2,84%,4.9%);
+    background: #0c0c15 !important;
     padding-top: 4px !important;
     padding-bottom: 8px !important;
 }
+[data-testid="stBottom"] > div { background: #0c0c15 !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -328,8 +344,8 @@ def esc(text):
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown(
-        '<div style="padding:14px 16px;border-bottom:1px solid hsl(217.2,32.6%,17.5%);'
-        'font-size:15px;font-weight:700;color:hsl(210,40%,98%)">⚡ LLM Bridge</div>',
+        '<div style="padding:14px 16px;border-bottom:1px solid #1e1e2e;'
+        'font-size:15px;font-weight:700;color:#ddddf0">⚡ LLM Bridge</div>',
         unsafe_allow_html=True
     )
     st.markdown('<div style="padding:16px">', unsafe_allow_html=True)
@@ -339,7 +355,7 @@ with st.sidebar:
     st.markdown(f"""
     <style>
     div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] {{
-        background: hsl(217,32%,10%);
+        background: #13131f;
         border-radius: 8px;
         padding: 3px;
         gap: 2px !important;
@@ -348,7 +364,7 @@ with st.sidebar:
         background: transparent !important;
         border: none !important;
         border-radius: 6px !important;
-        color: hsl(215,20%,50%) !important;
+        color: #4a4a66 !important;
         font-size: 12px !important;
         font-weight: 600 !important;
         padding: 5px 0 !important;
@@ -356,12 +372,12 @@ with st.sidebar:
         width: 100% !important;
     }}
     div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] .stButton > button:hover {{
-        background: hsl(217,32%,16%) !important;
-        color: hsl(215,20%,80%) !important;
+        background: #1e1e2e !important;
+        color: #9898bb !important;
     }}
     div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] .stButton:{'first' if is_discussion else 'last'}-of-type > button {{
-        background: hsl(217,32%,22%) !important;
-        color: hsl(210,40%,95%) !important;
+        background: #2a2a40 !important;
+        color: #ddddf0 !important;
     }}
     </style>
     """, unsafe_allow_html=True)
@@ -479,7 +495,7 @@ if not msgs:
         <div style="text-align:center;padding:80px 40px">
           <div style="font-size:56px;margin-bottom:16px;opacity:.4">⚔️</div>
           <div style="font-size:22px;font-weight:700;color:#f0f4ff;margin-bottom:8px">Debate Arena</div>
-          <div style="font-size:14px;color:#6b7a99;line-height:1.6">
+          <div style="font-size:14px;color:#5a5a7a;line-height:1.6">
             Enter any topic below. Gemini opens, Groq responds — 3 rounds each.<br>
             An LLM judge delivers the final verdict.
           </div>
@@ -489,7 +505,7 @@ if not msgs:
         <div style="text-align:center;padding:80px 40px">
           <div style="font-size:56px;margin-bottom:16px;opacity:.4">⚡</div>
           <div style="font-size:22px;font-weight:700;color:#f0f4ff;margin-bottom:8px">Switch Without Losing Context</div>
-          <div style="font-size:14px;color:#6b7a99;line-height:1.6">Chat with any AI. Switch anytime — your conversation travels with you.</div>
+          <div style="font-size:14px;color:#5a5a7a;line-height:1.6">Chat with any AI. Switch anytime — your conversation travels with you.</div>
         </div>"""
 else:
     parts = []
@@ -502,14 +518,14 @@ else:
         if role == "user":
             parts.append(f"""
             <div style="display:flex;flex-direction:row;justify-content:flex-end;align-items:flex-end;gap:10px;margin:10px 0">
-              <div style="background:hsl(217.2,91.2%,59.8%);color:#fff;border-radius:18px 18px 4px 18px;
+              <div style="background:#7c5af5;color:#fff;border-radius:18px 18px 4px 18px;
                 padding:10px 16px;max-width:60%;font-size:14px;line-height:1.6;word-wrap:break-word">
                 {esc(msg["content"])}
               </div>
               <div style="width:34px;height:34px;min-width:34px;border-radius:8px;
-                background:rgba(99,145,242,0.15);border:1px solid rgba(99,145,242,0.4);
+                background:rgba(124,90,245,0.15);border:1px solid rgba(124,90,245,0.4);
                 display:flex;align-items:center;justify-content:center;
-                font-size:10px;font-weight:700;color:hsl(217.2,91.2%,69%);flex-shrink:0">You</div>
+                font-size:10px;font-weight:700;color:#9d80f8;flex-shrink:0">You</div>
             </div>""")
 
         # ── Model switch pill ──
@@ -520,7 +536,7 @@ else:
             <div style="display:flex;justify-content:center;padding:8px 0;margin:4px 0">
               <div style="display:inline-flex;align-items:center;gap:6px;
                 background:rgba(50,60,90,0.5);border:1px solid rgba(70,85,120,0.5);
-                border-radius:999px;padding:4px 14px;font-size:11px;color:#6b7a99">
+                border-radius:999px;padding:4px 14px;font-size:11px;color:#5a5a7a">
                 ↕ Switched to {icon} {to_name} — context preserved
               </div>
             </div>""")
@@ -539,9 +555,9 @@ else:
                 background:{badge_bg};border:1px solid {badge_bdr};
                 display:flex;align-items:center;justify-content:center;
                 font-size:10px;font-weight:700;color:{badge_color};flex-shrink:0">{label}</div>
-              <div style="background:hsl(217.2,32.6%,13%);border:1px solid hsl(217.2,32.6%,22%);
+              <div style="background:#13131f;border:1px solid #2a2a40;
                 border-radius:18px;padding:10px 16px;display:flex;align-items:center;gap:8px;
-                font-size:13px;color:#6b7a99;font-style:italic">
+                font-size:13px;color:#5a5a7a;font-style:italic">
                 <span>{name} is thinking</span>
                 <span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>
               </div>
@@ -563,7 +579,7 @@ else:
                 background:{badge_bg};border:1px solid {badge_bdr};
                 display:flex;align-items:center;justify-content:center;
                 font-size:10px;font-weight:700;color:{badge_color};flex-shrink:0">{label}</div>
-              <div style="background:hsl(217.2,32.6%,13%);border:1px solid {bubble_bdr};
+              <div style="background:#13131f;border:1px solid {bubble_bdr};
                 border-radius:18px 18px 18px 4px;padding:10px 16px;max-width:60%;word-wrap:break-word">
                 <div style="font-size:10px;font-weight:700;text-transform:uppercase;
                   letter-spacing:.8px;color:{tag_color};margin-bottom:5px;opacity:.8">{tag_name}</div>
@@ -607,19 +623,19 @@ else:
                 round_label = ROUND_LABEL.get(rnd, f"Round {rnd}")
                 round_divider = f"""
                 <div style="display:flex;align-items:center;gap:10px;margin:18px 0 6px">
-                  <div style="flex:1;height:1px;background:hsl(217.2,32.6%,20%)"></div>
+                  <div style="flex:1;height:1px;background:#1e1e2e"></div>
                   <div style="font-size:11px;font-weight:700;text-transform:uppercase;
                     letter-spacing:.8px;color:hsl(271,91%,72%);
                     background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);
                     border-radius:999px;padding:3px 12px">{round_label}</div>
-                  <div style="flex:1;height:1px;background:hsl(217.2,32.6%,20%)"></div>
+                  <div style="flex:1;height:1px;background:#1e1e2e"></div>
                 </div>"""
 
             # Groq right-aligned, Gemini left-aligned
             if is_groq:
                 bubble_html = f"""
                 <div style="display:flex;flex-direction:row;justify-content:{align};align-items:flex-end;gap:10px;margin:8px 0">
-                  <div style="background:hsl(217.2,32.6%,13%);border:1px solid {bubble_bdr};
+                  <div style="background:#13131f;border:1px solid {bubble_bdr};
                     border-radius:{radius};padding:10px 16px;max-width:62%;word-wrap:break-word">
                     <div style="font-size:10px;font-weight:700;text-transform:uppercase;
                       letter-spacing:.8px;color:{tag_color};margin-bottom:5px;opacity:.8">{speaker}</div>
@@ -637,7 +653,7 @@ else:
                     background:{badge_bg};border:1px solid {badge_bdr};
                     display:flex;align-items:center;justify-content:center;
                     font-size:10px;font-weight:700;color:{badge_color};flex-shrink:0">{label}</div>
-                  <div style="background:hsl(217.2,32.6%,13%);border:1px solid {bubble_bdr};
+                  <div style="background:#13131f;border:1px solid {bubble_bdr};
                     border-radius:{radius};padding:10px 16px;max-width:62%;word-wrap:break-word">
                     <div style="font-size:10px;font-weight:700;text-transform:uppercase;
                       letter-spacing:.8px;color:{tag_color};margin-bottom:5px;opacity:.8">{speaker}</div>
@@ -676,17 +692,17 @@ components.html(f"""
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
   * {{ box-sizing:border-box; margin:0; padding:0; font-family:'Inter',sans-serif; }}
   html, body {{
-    background: hsl(222.2,84%,6%) !important;
+    background: #0e0e18 !important;
     height: 100%; overflow-y: auto;
-    scrollbar-width: thin; scrollbar-color: hsl(217.2,32.6%,25%) transparent;
+    scrollbar-width: thin; scrollbar-color: #2a2a40 transparent;
   }}
   body::-webkit-scrollbar {{ width: 6px; }}
   body::-webkit-scrollbar-track {{ background: transparent; }}
-  body::-webkit-scrollbar-thumb {{ background: hsl(217.2,32.6%,25%); border-radius: 3px; }}
+  body::-webkit-scrollbar-thumb {{ background: #2a2a40; border-radius: 3px; }}
   .wrap {{ padding: 16px; display:flex; flex-direction:column; gap:4px; }}
   .dots {{ display:inline-flex; gap:4px; }}
   .dot {{
-    width:5px; height:5px; border-radius:50%; background:#6b7a99;
+    width:5px; height:5px; border-radius:50%; background:#5a5a7a;
     animation: blink 1.4s ease-in-out infinite; display:inline-block;
   }}
   .dot:nth-child(2) {{ animation-delay:.2s; }}
