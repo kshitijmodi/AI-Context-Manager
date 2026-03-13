@@ -430,14 +430,14 @@ with st.sidebar:
         background: #1e1e30 !important;
         color: #9898cc !important;
     }}
-    /* Discussion tab */
-    div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] .stButton:first-of-type > button {{
+    /* Discussion tab — 1st column */
+    div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] > div:nth-child(1) .stButton > button {{
         background: {disc_bg} !important;
         color: {disc_col} !important;
         border: 1px solid {disc_bdr} !important;
     }}
-    /* Debate tab */
-    div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] .stButton:last-of-type > button {{
+    /* Debate tab — 2nd column */
+    div[data-testid="stSidebarContent"] div[data-testid="stHorizontalBlock"] > div:nth-child(2) .stButton > button {{
         background: {deb_bg} !important;
         color: {deb_col} !important;
         border: 1px solid {deb_bdr} !important;
