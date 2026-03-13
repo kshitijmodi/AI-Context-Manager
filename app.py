@@ -343,8 +343,14 @@ def esc(text):
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown(
-        '<div style="padding:14px 16px;border-bottom:1px solid #252540;'
-        'font-size:15px;font-weight:700;color:#ddddf0;letter-spacing:-0.02em">🔄 AI Context Manager</div>',
+        '<div style="padding:22px 16px 18px;border-bottom:1px solid #252540;text-align:center">'
+        '<div style="font-size:22px;font-weight:800;letter-spacing:-0.04em;line-height:1.1;'
+        'background:linear-gradient(135deg,#a590f8 0%,#38c0f8 100%);'
+        '-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">'
+        'AI Context Manager</div>'
+        '<div style="font-size:11px;color:#3a3a5a;margin-top:5px;letter-spacing:.6px;text-transform:uppercase">'
+        'Cross-model conversations</div>'
+        '</div>',
         unsafe_allow_html=True
     )
     st.markdown('<div style="padding:16px">', unsafe_allow_html=True)
@@ -429,7 +435,7 @@ with st.sidebar:
                 st.session_state.active_llm = 'groq'
                 st.rerun()
 
-        if st.button("✨ Gemini 2.0 Flash", key="gemini_btn", use_container_width=True,
+        if st.button("✨ Gemini 2.5 Flash", key="gemini_btn", use_container_width=True,
                      type="primary" if st.session_state.active_llm == 'gemini' else "secondary"):
             if st.session_state.active_llm != 'gemini':
                 st.session_state.conversation.append(
@@ -492,7 +498,7 @@ if mode == 'debate':
     header_badge  = '<span class="model-badge badge-debate">⚔️&nbsp;&nbsp;Debate Arena — Gemini vs Groq</span>'
     latency_label = "3 rounds · judge verdict"
 else:
-    model_name  = "Gemini 2.0 Flash" if llm == 'gemini' else "Groq — Llama 3.1"
+    model_name  = "Gemini 2.5 Flash" if llm == 'gemini' else "Groq — Llama 3.1"
     badge_class = "badge-gemini"     if llm == 'gemini' else "badge-groq"
     badge_abbr  = "GGL"              if llm == 'gemini' else "LOC"
     latency     = "~410ms"           if llm == 'gemini' else "~90ms"
@@ -502,7 +508,7 @@ else:
 st.markdown(f"""
 <div class="app-header">
   <div style="display:flex;align-items:center;gap:12px">
-    <span style="font-size:18px;font-weight:800;color:#ddddf0;letter-spacing:-0.03em">🔄 AI Context Manager</span>
+    <span style="font-size:22px;font-weight:800;letter-spacing:-0.04em;line-height:1;background:linear-gradient(135deg,#a590f8 0%,#38c0f8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">AI Context Manager</span>
     {header_badge}
   </div>
   <div style="display:flex;align-items:center;gap:14px">
@@ -558,7 +564,7 @@ else:
 
         # ── Model switch pill ──
         elif role == "switch":
-            to_name = "Gemini 2.0 Flash" if msg["to"] == "gemini" else "Groq"
+            to_name = "Gemini 2.5 Flash" if msg["to"] == "gemini" else "Groq"
             icon    = "✨" if msg["to"] == "gemini" else "🔥"
             parts.append(f"""
             <div style="display:flex;justify-content:center;padding:8px 0;margin:4px 0">
@@ -772,7 +778,7 @@ if mode == 'discussion':
             send_message(user_input)
             st.session_state.processing = False
 
-    active_name = "Gemini 2.0 Flash" if llm == 'gemini' else "Groq"
+    active_name = "Gemini 2.5 Flash" if llm == 'gemini' else "Groq"
     st.chat_input(f"Message {active_name}…", key="chat_input", on_submit=on_send,
                   disabled=st.session_state.processing)
 
