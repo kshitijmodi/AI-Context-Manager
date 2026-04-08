@@ -133,8 +133,8 @@ Winner: Groq
 ### Installation
 
 ```bash
-git clone https://github.com/kshitijmodi/AI-Context-Manager.git
-cd AI-Context-Manager
+git clone https://github.com/yourusername/llm-bridge.git
+cd llm-bridge
 
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
@@ -164,15 +164,19 @@ Open your browser at `http://localhost:8501`.
 ## 🗂️ Project Structure
 
 ```
-AI-Context-Manager/
+llm-bridge/
 ├── app.py                  # Main Streamlit application
-├── llmbridge2.py           # Core LLM bridge & context continuity engine
-├── main.py                 # Entry point / runner
-├── styles.css              # Custom UI styling
+├── context_manager.py      # Core context continuity engine
+├── models/
+│   ├── groq_handler.py     # Groq API integration
+│   └── gemini_handler.py   # Gemini API integration
+├── utils/
+│   ├── token_optimizer.py  # Token counting & compression
+│   └── exporter.py         # Conversation export utilities
+├── styles/
+│   └── chat.css            # Custom UI styling
 ├── requirements.txt
-├── .github/
-│   └── workflows/
-│       └── deploy-hf.yml   # Auto-deploy to Hugging Face Spaces on push
+├── .env.example
 └── README.md
 ```
 
