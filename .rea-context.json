@@ -1,0 +1,17 @@
+[
+  {
+    "role": "user",
+    "text": "Was my api key exposed to the gh repo?",
+    "timestamp": "2026-04-10T21:35:52.363Z"
+  },
+  {
+    "role": "assistant",
+    "text": "**No, your API key was not exposed.**\n\nHere's what I found:\n\n- `.env` is properly listed in `.gitignore` — it was never committed.\n- No `.env` files appear anywhere in the git history.\n- The only API key references in the entire commit history are placeholder strings (`your_groq_api_key_here`, `your_gemini_api_key_here`) — likely from an `.env.example` or README file — not real key values.\n- No actual key patterns (like `sk-...`, `gsk_...`, `AIza...`) appear in any commit.\n\nYou're safe.",
+    "timestamp": "2026-04-10T21:35:52.396Z"
+  },
+  {
+    "role": "user",
+    "text": "The Chevron that expands and collapses the left nav menu, hides the title of the app when expanded. \nThe Chevron needs to move towards the center of the page instead of top",
+    "timestamp": "2026-04-12T03:08:34.722Z"
+  }
+]
