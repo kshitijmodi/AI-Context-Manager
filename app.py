@@ -30,6 +30,9 @@ body, .stApp { background: #0c0c15 !important; }
     background: #0c0c15 !important;
     border-right: 1px solid #1e1e2e !important;
     color: #7c7c99 !important;
+    position: fixed !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
 }
 [data-testid="collapsedControl"] svg { color: #7c7c99 !important; fill: #7c7c99 !important; }
 
